@@ -1,6 +1,8 @@
 CREATE TABLE Campgrounds(
 CampGroundId INT PRIMARY KEY IDENTITY(1,1),
 FullName varchar(30),
+Phone varchar(30),
+FullAddress varchar(255)
 )
 
 CREATE TABLE Amenity(
@@ -14,6 +16,9 @@ CREATE TABLE Campsites(
 CampsiteId INT PRIMARY KEY IDENTITY(1,1),
 CampgroundId INT FOREIGN KEY REFERENCES Campgrounds(CampgroundId),
 FullName varchar(30),
+CampType varchar(30),
+Capacity INT,
+HasShade varchar(3),
 ToAmenityId INT FOREIGN KEY REFERENCES Amenity(AmenityId),
 Price float
 )
@@ -36,3 +41,4 @@ UserId INT FOREIGN KEY REFERENCES Users(UserId),
 ReservationdDate DATETIME DEFAULT GETDATE(),
 ResDays INT
 )
+
