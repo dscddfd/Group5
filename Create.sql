@@ -45,3 +45,9 @@ UserId INT FOREIGN KEY REFERENCES Users(UserId),
 ReservationdDate DATETIME DEFAULT GETDATE(),
 ResDays INT
 )
+
+CREATE TABLE Photos(
+PhotoId INT PRIMARY KEY IDENTITY(1,1),
+CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
+FileLocation varchar(255)
+)
