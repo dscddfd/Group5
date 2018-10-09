@@ -9,16 +9,24 @@ FullAddress varchar(255)
 CREATE TABLE Campsites(
 CampsiteId INT PRIMARY KEY IDENTITY(1,1),
 CampgroundId INT FOREIGN KEY REFERENCES Campgrounds(CampgroundId),
+CampsiteAmenityId INT FOREIGN KEY REFERENCES CampsiteToAmenity(CampsiteAmenityId),
 FullName varchar(30),
 Capacity INT,
 HasShade varchar(3),
 Price float
 )
 
+CREATE TABLE CampsiteToAmenity(
+  CampsiteAmenityId INT PRIMARY KEY IDENTITY(1,1),
+  CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
+  AmenityId INT FOREIGN KEY REFERENCES Amenity(AmenityId)
+  )
+  
+  
+
 CREATE TABLE Amenity(
 AmenityId INT PRIMARY KEY IDENTITY(1,1),
-CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
-AmenitySets varchar(255),
+AmenitySet varchar(255),
 )
 
 CREATE TABLE CampType(
