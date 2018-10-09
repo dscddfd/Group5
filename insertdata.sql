@@ -25,14 +25,18 @@ FullAddress varchar(255)
 )
 INSERT INTO Campgrounds(FullName, Phone, FullAddress) VALUES('Monte Cristo', '801-745-3215','45 S 100 W, Woodruff, UT 84086');
 
+
+
 CREATE TABLE Campsites(
 CampsiteId INT PRIMARY KEY IDENTITY(1,1),
 CampgroundId INT FOREIGN KEY REFERENCES Campgrounds(CampgroundId),
+CampsiteAmenityId INT FOREIGN KEY REFERENCES CampsiteToAmenity(CampsiteAmenityId),
 FullName varchar(30),
 Capacity INT,
 HasShade varchar(3),
 Price float
 )
+
 
 INSERT INTO Campsites(FullName, Capacity, HasShade, Price) VALUES('Single Site One', 10, 'YES', 23.00);
 INSERT INTO Campsites(FullName, Capacity, HasShade, Price) VALUES('Single Site Two', 5, 'YES', 23.00);
@@ -43,22 +47,27 @@ INSERT INTO Campsites(FullName, Capacity, HasShade, Price) VALUES('Group Site Si
 
 CREATE TABLE Amenity(
 AmenityId INT PRIMARY KEY IDENTITY(1,1),
-CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
-AmenitySets varchar(255)
+AmenitySet varchar(255),
 )
 
-INSERT INTO Amenity(AmenitySets) VALUES('Fire Pit');
-INSERT INTO Amenity(AmenitySets) VALUES('Showers');
-INSERT INTO Amenity(AmenitySets) VALUES('Flush Toilets');
-INSERT INTO Amenity(AmenitySets) VALUES('Full Hookups');
-INSERT INTO Amenity(AmenitySets) VALUES('Parrtial Hookups');
-INSERT INTO Amenity(AmenitySets) VALUES('Pools');
-INSERT INTO Amenity(AmenitySets) VALUES('Laundry');
-INSERT INTO Amenity(AmenitySets) VALUES('Pet Friendly');
-INSERT INTO Amenity(AmenitySets) VALUES('Group Options');
-INSERT INTO Amenity(AmenitySets) VALUES('Tents');
-INSERT INTO Amenity(AmenitySets) VALUES('Camper');
-INSERT INTO Amenity(AmenitySets) VALUES('Electric Hookup');
+INSERT INTO Amenity(AmenitySet) VALUES('Fire Pit');
+INSERT INTO Amenity(AmenitySet) VALUES('Showers');
+INSERT INTO Amenity(AmenitySet) VALUES('Flush Toilets');
+INSERT INTO Amenity(AmenitySet) VALUES('Full Hookups');
+INSERT INTO Amenity(AmenitySet) VALUES('Parrtial Hookups');
+INSERT INTO Amenity(AmenitySet) VALUES('Pools');
+INSERT INTO Amenity(AmenitySet) VALUES('Laundry');
+INSERT INTO Amenity(AmenitySet) VALUES('Pet Friendly');
+INSERT INTO Amenity(AmenitySet) VALUES('Group Options');
+INSERT INTO Amenity(AmenitySet) VALUES('Tents');
+INSERT INTO Amenity(AmenitySet) VALUES('Camper');
+INSERT INTO Amenity(AmenitySet) VALUES('Electric Hookup');
+
+CREATE TABLE CampsiteToAmenity(
+  CampsiteAmenityId INT PRIMARY KEY IDENTITY(1,1),
+  CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
+  AmenityId INT FOREIGN KEY REFERENCES Amenity(AmenityId)
+  )
 
 CREATE TABLE CampType(
 CampTypeId INT PRIMARY KEY IDENTITY(1,1),
@@ -88,19 +97,17 @@ INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Derek S
 INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Alex Karev','AKarev552@gmail.com', '555-550-0005', '2019-09-01');
 INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Alex Karev','AKarev552@gmail.com', '555-550-0005', '2019-09-02');
 
-
 CREATE TABLE Reservations(
 ResId INT PRIMARY KEY IDENTITY(1,1),
 CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
 UserId INT FOREIGN KEY REFERENCES Users(UserId),
-ReservationdDate DATETIME DEFAULT GETDATE() NULL,
-ResDays INT
+ReservationDate DATE
 )
 
-INSERT INTO Reservations(ReservationdDate, ResDays)VALUES(NULL, 4);
-INSERT INTO Reservations(ReservationdDate, ResDays)VALUES(NULL, 1);
-INSERT INTO Reservations(ReservationdDate, ResDays)VALUES(NULL, 7);
-INSERT INTO Reservations(ReservationdDate, ResDays)VALUES(NULL, 3);
+INSERT INTO Reservations(ReservationDate)VALUES(NULL, 4);
+INSERT INTO Reservations(ReservationDate)VALUES(NULL, 1);
+INSERT INTO Reservations(ReservationDate)VALUES(NULL, 7);
+INSERT INTO Reservations(ReservationDate)VALUES(NULL, 3);
 
 CREATE TABLE Photos(
 PhotoId INT PRIMARY KEY IDENTITY(1,1),
