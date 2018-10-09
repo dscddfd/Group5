@@ -47,7 +47,7 @@ CREATE TABLE Reservations(
 ResId INT PRIMARY KEY IDENTITY(1,1),
 CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
 UserId INT FOREIGN KEY REFERENCES Users(UserId),
-ReservationdDate DATETIME DEFAULT GETDATE(),
+ReservationdDate DATE,
 ResDays INT
 )
 
