@@ -74,14 +74,19 @@ UserId INT PRIMARY KEY IDENTITY(1,1),
 FullName varchar(30),
 Email varchar(255),
 PhoneNumber varchar(30),
-RegistrationdDate DATETIME DEFAULT GETDATE() NULL
+RegistrationDate DATE
 )
---INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Ronald Regan','RRegan11@gmail.com', '555-554-0001', NULL);
---INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Abraham Lincoln','AbeLincoln@aol.com', '555-553-0002', NULL);
---INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Meredith Grey','MeredithGrey@gmail.com', '555-551-0003', NULL);
---INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Derek Shepard','DerekShepard@yahoo.com', '555-550-0004', NULL);
---INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Alex Karev','AKarev552@gmail.com', '555-550-0005', NULL);
-
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Ronald Regan','RRegan11@gmail.com', '555-554-0001', '2019-03-03');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Abraham Lincoln','AbeLincoln@aol.com', '555-553-0002', '2019-03-12');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Abraham Lincoln','AbeLincoln@aol.com', '555-553-0002', '2019-03-13');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Abraham Lincoln','AbeLincoln@aol.com', '555-553-0002', '2019-03-14');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Abraham Lincoln','AbeLincoln@aol.com', '555-553-0002', '2019-03-15');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Meredith Grey','MeredithGrey@gmail.com', '555-551-0003', '2019-06-13');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Meredith Grey','MeredithGrey@gmail.com', '555-551-0003', '2019-06-14');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Meredith Grey','MeredithGrey@gmail.com', '555-551-0003', '2019-06-15');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Derek Shepard','DerekShepard@yahoo.com', '555-550-0004', '2019-07-20');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Alex Karev','AKarev552@gmail.com', '555-550-0005', '2019-09-01');
+INSERT INTO Users(FullName, Email, PhoneNumber, RegistrationDate)VALUES('Alex Karev','AKarev552@gmail.com', '555-550-0005', '2019-09-02');
 
 
 CREATE TABLE Reservations(
@@ -103,7 +108,6 @@ CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
 FileLocation varchar(255)
 )
 
---INSERT INTO Photos(FileLocation) VALUES();
-
-
-
+INSERT INTO Photos(FileLocation) VALUES('folder/folder2/pic1');
+INSERT INTO Photos(FileLocation) VALUES('folder/folder2/pic2');
+INSERT INTO Photos(FileLocation) VALUES('folder/folder2/pic3');
