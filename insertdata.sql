@@ -118,3 +118,4 @@ FileLocation varchar(255)
 INSERT INTO Photos(FileLocation) VALUES('folder/folder2/pic1');
 INSERT INTO Photos(FileLocation) VALUES('folder/folder2/pic2');
 INSERT INTO Photos(FileLocation) VALUES('folder/folder2/pic3');
+
