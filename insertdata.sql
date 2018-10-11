@@ -101,7 +101,8 @@ CREATE TABLE Reservations(
 ResId INT PRIMARY KEY IDENTITY(1,1),
 CampsiteId INT FOREIGN KEY REFERENCES Campsites(CampsiteId),
 UserId INT FOREIGN KEY REFERENCES Users(UserId),
-ReservationDate DATE
+ReservationDate DATE,
+ActiveReservation bit DEFAULT 1
 )
 
 INSERT INTO Reservations(ReservationDate)VALUES(NULL, 4);
