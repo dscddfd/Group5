@@ -5,7 +5,7 @@ Ben
 Chao
 Mackenzie
 */
-
+DROP TABLE CampsiteAmenity
 DROP TABLE Campgrounds
 DROP TABLE Campsites
 DROP TABLE Amenity
