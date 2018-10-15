@@ -6,7 +6,15 @@ Chao
 Mackenzie
 */
 
-
+DROP TABLE CampHost
+DROP TABLE Campsites --1
+DROP TABLE Campgrounds --2
+DROP TABLE Users  --3
+DROP TABLE Amenity --4
+DROP TABLE CampType --t
+DROP TABLE CampsitesToAmenities
+DROP TABLE Reservations --t
+DROP TABLE Photos --t
 
 /*-------------------TABLES-------------------------------- */
 
@@ -48,7 +56,6 @@ SET IDENTITY_INSERT dbo.CampHost OFF;
 
 CREATE TABLE Campsites(
 CampsiteId INT PRIMARY KEY IDENTITY(1,1),
---CampsiteAmenityId INT FOREIGN KEY REFERENCES CampsiteToAmenity(CampsiteAmenityId),
 CampsiteName varchar(30),
 Capacity INT,
 HasShade varchar(3),
@@ -57,7 +64,7 @@ CampgroundId INT FOREIGN KEY REFERENCES Campgrounds(CampgroundId),
 CampTypeId INT
 )
 SET IDENTITY_INSERT dbo.Campsites ON;
-INSERT CAMPSITES (CampsiteId, CampsiteName, Capacity, HasShade, Price, CampgroundId, CampTypeId) 
+INSERT Campsites (CampsiteId, CampsiteName, Capacity, HasShade, Price, CampgroundId, CampTypeId) 
 VALUES 
 ('1','Single Site One','10','Y','23','1','201'),
 ('2','Single Site Two','5','Y','23','1','202'),
@@ -252,7 +259,7 @@ FileLocation varchar(255)
 )
 SET IDENTITY_INSERT dbo.Photos ON;
 
-INSERT PHOTOS (PhotoID, CampsiteID, CampgroundId, FileLocation) 
+INSERT PHOTOS (PhotoId, CampsiteId, CampgroundId, FileLocation) 
 VALUES ('001','1','1','folder/photos/campground1/campsite1/pic1.jpg'),
 ('002','2','1','folder/photos/campground1/campsite2/pic2.jpg'),
 ('003','3','1','folder/photos/campground1/campsite3/pic3.jpg'),
@@ -265,14 +272,6 @@ VALUES ('001','1','1','folder/photos/campground1/campsite1/pic1.jpg'),
 
 SET IDENTITY_INSERT dbo.Photos OFF;
 
-DROP TABLE CampHost
-DROP TABLE Campsites --1
-DROP TABLE Campgrounds --2
-DROP TABLE Users  --3
-DROP TABLE Amenity --4
-DROP TABLE CampType --t
-DROP TABLE CampsitesToAmenities
-DROP TABLE Reservations --t
-DROP TABLE Photos --t
+
 
 
