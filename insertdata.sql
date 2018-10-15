@@ -5,14 +5,7 @@ Ben
 Chao
 Mackenzie
 */
-DROP TABLE Campsites --1
-DROP TABLE Campgrounds --2
-DROP TABLE Users  --3
-DROP TABLE Amenity --4
-DROP TABLE CampType --t
-DROP TABLE CampsitesToAmenities
-DROP TABLE Reservations --t
-DROP TABLE Photos --t
+
 
 
 /*-------------------TABLES-------------------------------- */
@@ -28,7 +21,7 @@ StateProvince varchar(30),
 ZipPostalCode varchar(30)
 )
 SET IDENTITY_INSERT dbo.Campgrounds ON;
-INSERT CAMPGROUNDS (CampGroundID, CampGroundName, Phone, HouseNumber, Street, City, StateProvince, ZipPostalCode) 
+INSERT CAMPGROUNDS (CampGroundId, CampGroundName, Phone, HouseNumber, Street, City, StateProvince, ZipPostalCode) 
 			VALUES ('1','Monte Cristo','801-745-3215','45 S','100 W','Woodruff','UT','84086'),
 				   ('2','Bridger Bay Campground','801-773-2941','4528 W','1700 S','Syracuse','UT','84075');
 SET IDENTITY_INSERT dbo.Campgrounds OFF;
@@ -36,6 +29,21 @@ SET IDENTITY_INSERT dbo.Campgrounds OFF;
 *
 FROM
 Campgrounds*/
+
+CREATE TABLE CampHost(
+CampHostId INT PRIMARY KEY IDENTITY(1,1),
+CampgroundId INT FOREIGN KEY REFERENCES Campgrounds(CampgroundId),
+HostPhoneNum varchar(250),
+HostFirstName varchar(250),
+HostLastName varchar(250)
+)
+SET IDENTITY_INSERT dbo.CampHost ON;
+INSERT 
+	CampHost(CampHostId, CampgroundId, HostPhoneNum, HostFirstName, HostLastName) 
+VALUES 
+	('801','1','801-555-1234','Daniel','Ocean'),
+	('802','2','801-555-5678','Ellen','Ripley');
+SET IDENTITY_INSERT dbo.CampHost OFF;
 
 
 CREATE TABLE Campsites(
@@ -61,16 +69,7 @@ VALUES
 ('8','Bridger Bay 02','8','N','20','2','201'),
 ('9','Bridger Bay 03','8','N','20','2','201'),
 ('10','Bridger Bay 04','8','N','20','2','201'),
-('11','Bridger Bay 05','8','N','20','2','201'),
-('12','Bridger Bay 06','8','N','20','2','201'),
-('13','Bridger Bay 07','8','N','20','2','201'),
-('14','Bridger Bay 08','8','N','20','2','201'),
-('15','Bridger Bay 09','8','N','20','2','201'),
-('16','Bridger Bay 10','8','N','20','2','201'),
-('17','Bridger Bay 11','8','N','20','2','201'),
-('18','Bridger Bay 12','8','N','20','2','201'),
-('19','Bridger Bay 20','8','N','20','2','201'),
-('20','Bridger Bay 21','8','N','20','2','201');
+('11','Bridger Bay 05','8','N','20','2','201')
 SET IDENTITY_INSERT dbo.Campsites OFF;
 
 /*SELECT *
@@ -111,7 +110,7 @@ CREATE TABLE CampsitesToAmenities(
   AmenityId INT FOREIGN KEY REFERENCES Amenity(AmenityId)
   )
 SET IDENTITY_INSERT dbo.CampsitesToAmenities ON;
-INSERT CAMPSITESTOAMENITIES (CampsiteAmenityId, CampsiteId, AmenityId) 
+INSERT CampsitesToAmenities (CampsiteAmenityId, CampsiteId, AmenityId) 
 VALUES ('700','1','100'),
 ('701','1','101'),
 ('702','1','102'),
@@ -141,50 +140,21 @@ VALUES ('700','1','100'),
 ('726','6','100'),
 ('727','6','108'),
 ('728','6','104'),
-('729','19','112'),
-('730','20','112'),
 ('732','7','100'),
 ('733','8','100'),
 ('734','9','100'),
 ('735','10','100'),
 ('736','11','100'),
-('737','12','100'),
-('738','13','100'),
-('739','14','100'),
-('740','15','100'),
-('741','16','100'),
-('742','17','100'),
-('743','18','100'),
-('744','19','100'),
-('745','20','100'),
 ('747','7','110'),
 ('748','8','110'),
 ('749','9','110'),
 ('750','10','110'),
 ('751','11','110'),
-('752','12','110'),
-('753','13','110'),
-('754','14','110'),
-('755','15','110'),
-('756','16','110'),
-('757','17','110'),
-('758','18','110'),
-('759','19','110'),
-('760','20','110'),
 ('762','7','107'),
 ('763','8','107'),
 ('764','9','107'),
 ('765','10','107'),
-('766','11','107'),
-('767','12','107'),
-('768','13','107'),
-('769','14','107'),
-('770','15','107'),
-('771','16','107'),
-('772','17','107'),
-('773','18','107'),
-('774','19','107'),
-('775','20','107')
+('766','11','107')
 
 SET IDENTITY_INSERT dbo.CampsitesToAmenities OFF;
 
@@ -271,10 +241,7 @@ VALUES ('500','1','400','2019-05-01'),
 ('531','11','402','2019-07-16'),
 ('532','11','402','2019-07-17'),
 ('533','11','402','2019-07-18'),
-('534','11','402','2019-07-19'),
-('535','17','401','2019-08-22'),
-('536','17','401','2019-08-23'),
-('537','17','401','2019-08-29');
+('534','11','402','2019-07-19')
 SET IDENTITY_INSERT dbo.Reservations OFF;
 
 CREATE TABLE Photos(
@@ -293,10 +260,19 @@ VALUES ('001','1','1','folder/photos/campground1/campsite1/pic1.jpg'),
 ('005','5','1','folder/photos/campground1/campsite5/pic5.jpg'),
 ('006','6','1','folder/photos/campground1/campsite6/pic6.jpg'),
 ('007','10','2','folder/photos/campground2/campsite10/pic7.jpg'),
-('008','11','2','folder/photos/campground2/campsite11/pic8.jpg'),
-('009','12','2','folder/photos/campground2/campsite12/pic9.jpg'),
-('010','13','2','folder/photos/campground2/campsite13/pic10.jpg'),
-('011','14','2','folder/photos/campground2/campsite14/pic11.jpg');
+('008','11','2','folder/photos/campground2/campsite11/pic8.jpg')
+
 
 SET IDENTITY_INSERT dbo.Photos OFF;
+
+DROP TABLE CampHost
+DROP TABLE Campsites --1
+DROP TABLE Campgrounds --2
+DROP TABLE Users  --3
+DROP TABLE Amenity --4
+DROP TABLE CampType --t
+DROP TABLE CampsitesToAmenities
+DROP TABLE Reservations --t
+DROP TABLE Photos --t
+
 
