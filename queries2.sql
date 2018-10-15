@@ -85,17 +85,19 @@ broken out by month for June, July, August, and September.
 
 
 SELECT
-	DATENAME(MONTH, DATEADD(MONTH,TGIF.ReserveMonth,0)-1) [ReserveMonth], 
-	TGIF.CGName [CampName],
-	CONCAT('$',SUM(TGIF.CampRevenue)) [TotalRevenue]
+	PVT.CGName,
+	PVT.YearReserved,
+	CONCAT('$',PVT.[6])[June],
+	CONCAT('$',PVT.[7])[July],
+	CONCAT('$',PVT.[8])[August],
+	CONCAT('$',PVT.[9])[September]
 FROM
 (
 	SELECT 
-		NCSI.DaysReserved [NumDaysRes], 
-		CS.CampsiteId [SiteId], 
 		CG.CampGroundName [CGName],
-		CS.Price * NCSI.DaysReserved [CampRevenue],
-		NCSI.ReserveMonth
+		SUM(CS.Price * NCSI.DaysReserved) [CampRevenue],
+		NCSI.ReserveMonth [MonthReserved],
+		NCSI.ReserveYear [YearReserved]
 	FROM
 	(
 		SELECT 
@@ -105,18 +107,8 @@ FROM
 			YEAR(ReservationDate) [ReserveYear]
 		FROM 
 			dbo.Reservations RES
-		WHERE 
-			(
-				MONTH(ReservationDate) = '6'
-			OR
-				MONTH(ReservationDate) = '7'
-			OR
-				MONTH(ReservationDate) = '8'
-			OR
-				MONTH(ReservationDate) = '9'
-			)
-		AND
-			YEAR(ReservationDate) = '2019'
+		WHERE
+			YEAR(ReservationDate) = 2019
 		GROUP BY 
 			CampsiteId,
 			MONTH(ReservationDate),
@@ -125,9 +117,17 @@ FROM
 	)NCSI
 	INNER JOIN dbo.CampSites CS ON NCSI.siteId = CS.CampsiteId
 	INNER JOIN dbo.Campgrounds CG ON CS.CampgroundId = CG.CampGroundId
+
+	GROUP BY
+	CG.CampGroundName,
+	NCSI.ReserveMonth,
+	NCSI.ReserveYear
+
 )TGIF
-GROUP BY
-	TGIF.CGName,
-	TGIF.ReserveMonth
+
+PIVOT(
+	SUM(TGIF.CampRevenue)
+	FOR TGIF.MonthReserved IN ([6],[7],[8],[9])
+)PVT
 
 
