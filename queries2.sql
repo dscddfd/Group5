@@ -29,8 +29,16 @@ SET IDENTITY_INSERT dbo.Reservations OFF;
 Write this query to cover one of the reservations you created above.
 */
 
+DECLARE @FromDate date
+DECLARE @ToDate date
+
+SET @FromDate = '2019-05-01'
+SET @ToDate = '2019-05-03'
+
 SELECT
-	DISTINCT CampsiteName, AmenityDescription
+	DISTINCT CampsiteName, 
+	AmenityDescription,
+	CONCAT(@FromDate,' TO ',@ToDate) [AvailableDates]
 FROM 
 (
 	SELECT 
@@ -47,7 +55,7 @@ FROM
 )CSI
 INNER JOIN dbo.Reservations RES ON RES.CampsiteId = CSI.CampsiteId
 WHERE 
-	RES.ReservationDate NOT BETWEEN '2019-05-01' AND '2019-05-02'
+	RES.ReservationDate NOT BETWEEN @FromDate AND @ToDate
 
 
 /*A query that shows how many days each spot for one of your campgrounds were reserved for a given date range.  
